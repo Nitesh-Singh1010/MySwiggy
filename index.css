@@ -1,0 +1,60 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    margin-bottom: 2rem;
+}
+.logo-container{
+    box-sizing: border-box;
+}
+.logo>img{
+ 
+   width: 5rem;
+
+}
+.nav-items>ul{
+    display: flex;
+    list-style-type: none;
+}
+.nav-items>ul>li{
+    padding: 10px;
+    margin: 10px;
+    font-size: 2rem;
+}
+
+.body{
+    border: 1px solid black;
+    margin: 25px 0px;
+}
+
+.restaurant-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.res-card{
+    background-color: whitesmoke;
+    padding: 10px;
+    width: 200px;
+    height: 400px;
+    margin: 15px;
+    border: 1px solid black;
+}
+.res-card>img{
+    width: 200px;
+}
+
+.res-card:hover{
+    border: 1px solid skyblue;
+    cursor: pointer;
+}
+.search{
+    font-size: 2rem;
+    padding: 10px;
+    margin: 2rem;
+}
+.filter-btn{
+    margin: 2rem;
+    cursor: pointer;
+    padding: 10px;
+}
