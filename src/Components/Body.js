@@ -1,61 +1,92 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
-import { restaurantList } from "../utils/MockData";
+// import { restaurantList } from "../utils/MockData";
+import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 const Body = () => {
-  const [listOfRestaurants,setListOfRestaurants]=useState(restaurantList);
-  let listOfRestaurantsJs = [
-    {
-      data: {
-        id: "74453",
-        name: "Domino's Pizza",
-        cloudinaryImageId: "bz9zkh2aqywjhpankb07",
-        cuisines: ["Pizzas"],
-        costForTwoString: "₹400 FOR TWO",
-        avgRating: "3.5",
-      },
-    },
-    {
-        data: {
-          id: "744538",
-          name: "KFC",
-          cloudinaryImageId: "bz9zkh2aqywjhpankb07",
-          cuisines: ["Pizzas"],
-          costForTwoString: "₹400 FOR TWO",
-          avgRating: "4.4",
-        },
-    },
-    {
-        data: {
-          id: "744503",
-          name: "McD",
-          cloudinaryImageId: "bz9zkh2aqywjhpankb07",
-          cuisines: ["Pizzas"],
-          costForTwoString: "₹400 FOR TWO",
-          avgRating: "4.6",
-        },
-    },
-  ];
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [displayedListOfRestaurants, setDisplayedListOfRestaurants] = useState(
+    []
+  );
+  const [searchText, setSearchText] = useState("");
+  // console.log("hello")
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+
+    const json = await data.json();
+    setListOfRestaurants(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setDisplayedListOfRestaurants(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+  };
+  if (listOfRestaurants.length == 0) {
+    return (
+      <>
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+        <Shimmer />
+      </>
+    );
+  }
+
   return (
     <>
-      <div className="search">Search</div>
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Search"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+
+          <button
+            className="search-btn"
+            onClick={() => {
+              const filteredList = listOfRestaurants.filter((res) =>
+                res?.info?.name.includes(searchText)
+              );
+              setDisplayedListOfRestaurants(filteredList);
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={(restaurant) => {
-            const filteredListOfRestaurants=listOfRestaurants.filter((res)=>{
-                return res.data.avgRating>4;
-            })
-            setListOfRestaurants(filteredListOfRestaurants)
-            // console.log(listOfRestaurants)
+            const filteredListOfRestaurants = listOfRestaurants.filter(
+              (res) => {
+                return res.info.avgRating > 4.2;
+              }
+            );
+            setDisplayedListOfRestaurants(filteredListOfRestaurants);
           }}
         >
           Top Rated Restaurants
         </button>
       </div>
       <div className="restaurant-list">
-        { listOfRestaurants.map((restaurant) => {
+        {displayedListOfRestaurants.map((restaurant) => {
           return (
-            <RestaurantCard key={restaurant.data.id} {...restaurant.data} />
+            <Link to={"restaurant/" + restaurant?.info?.id}>
+              <RestaurantCard
+                key={restaurant?.info?.id}
+                {...restaurant?.info}
+              />
+            </Link>
           );
         })}
       </div>
