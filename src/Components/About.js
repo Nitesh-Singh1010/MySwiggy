@@ -28,9 +28,9 @@ class About extends React.Component {
       <div>
         <h1>About Page</h1>
         <UserClass
-          name={"nitesh1"}
-          location={"jaipur"}
-          emailid={"iamnitesh22@gmail.com"}
+          // name={"nitesh1"}
+          // location={"jaipur"}
+          // emailid={"iamnitesh22@gmail.com"}
         />
         {/* this is for checking and learning react compnent life cycle */}
         {/* <UserClass

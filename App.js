@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import Body from "./src/Components/Body";
 import Header from "./src/Components/Header";
@@ -7,6 +7,11 @@ import About from "./src/Components/About";
 import Contact from "./src/Components/Contact";
 import Error from "./src/Components/Error";
 import RestaurantMenu from "./src/Components/RestaurantMenu";
+
+import { lazy } from "react";
+import { Suspense } from "react";
+// import Grocery from "./src/Components/Grocery";
+const Grocery=lazy(()=>import("./src/Components/Grocery"))
 // import RestaurantCard from "./src/Components/RestaurantCard";
 /* My Food App structure will look like this, 
             1) Header
@@ -50,6 +55,11 @@ const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <Body />,
+      },
+      {
+        path: "/grocery",
+        element: (<Suspense fallback={<h1>Grocery is loading...</h1>
+        }><Grocery /></Suspense>),
       },
       {
         path: "/about",

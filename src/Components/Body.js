@@ -3,6 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 // import { restaurantList } from "../utils/MockData";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [displayedListOfRestaurants, setDisplayedListOfRestaurants] = useState(
@@ -27,6 +28,12 @@ const Body = () => {
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false){
+    return (
+      <h1>Looks like you're offline. Please check your internet connection.</h1>
+    );
+  }
   if (listOfRestaurants.length == 0) {
     return (
       <>
@@ -40,8 +47,8 @@ const Body = () => {
 
   return (
     <>
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search p-4 m-4">
           <input
             type="text"
             className="search-bar"
@@ -53,7 +60,7 @@ const Body = () => {
           />
 
           <button
-            className="search-btn"
+            className="search-btn px-4 py-1 bg-green-200 m-4 rounded-lg"
             onClick={() => {
               const filteredList = listOfRestaurants.filter((res) =>
                 res?.info?.name.includes(searchText)
@@ -65,7 +72,7 @@ const Body = () => {
           </button>
         </div>
         <button
-          className="filter-btn"
+          className="filter-btn bg-green-200 h-10 mt-10 px-4 rounded-lg"
           onClick={(restaurant) => {
             const filteredListOfRestaurants = listOfRestaurants.filter(
               (res) => {
@@ -78,7 +85,7 @@ const Body = () => {
           Top Rated Restaurants
         </button>
       </div>
-      <div className="restaurant-list">
+      <div className="flex flex-wrap">
         {displayedListOfRestaurants.map((restaurant) => {
           return (
             <Link to={"restaurant/" + restaurant?.info?.id}>

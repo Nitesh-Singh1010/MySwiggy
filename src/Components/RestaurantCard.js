@@ -8,7 +8,7 @@ const RestaurantCard = ({
   avgRating,
 }) => {
   return (
-    <div className="res-card">
+    <div className="res-card m-4 p-4 w-[250px] bg-gray-100 hover:bg-gray-400">
       <img src={CDN_LINK + cloudinaryImageId} />
       <h2>{name}</h2>
       <h4>{cuisines.join(", ")}</h4>

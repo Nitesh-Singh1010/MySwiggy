@@ -10,7 +10,7 @@ class UserClass extends React.Component {
     // console.log(this.props.name,"child component constructor")
     this.state={
         userInfo:{
-          nme : "fdn",
+          name : "fdn",
           location:"jhvbx",
         }
     }
@@ -29,13 +29,14 @@ class UserClass extends React.Component {
   }
   render() {
     // console.log(this.props.name,"child component render")
-    const { name, location, emailid } = this.props; 
+    // const { name, location, emailid } = this.props; 
+    const { name } = this.state.userInfo; 
     // const { count1 } = this.state;
     return (
       <div className="user-card">
         <h2>Name : {name}</h2>
-        <h3>Location : {location}</h3>
-        <h4>Contact : {emailid}</h4>
+        {/* <h3>Location : {location}</h3> */}
+        {/* <h4>Contact : {emailid}</h4> */}
         {/* <h4>Count1={count1}</h4>
         <button
           onClick={() => {
