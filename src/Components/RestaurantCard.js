@@ -20,4 +20,16 @@ const RestaurantCard = ({
 
 export default RestaurantCard;
 
+
+// higher order component
+export const promotedRestaurantCard=(RestaurantCard)=>{
+   return (props)=>{
+    return(
+      <div className="">
+         <label>Promoted</label>
+        <RestaurantCard {...props}/>
+      </div>
+    )
+   }
+}
 //jsonMenu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards

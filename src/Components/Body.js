@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { promotedRestaurantCard } from "./RestaurantCard";
 // import { restaurantList } from "../utils/MockData";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
+  const isLabelled = false;
+  const RestaurantCardPromoted = promotedRestaurantCard(RestaurantCard);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [displayedListOfRestaurants, setDisplayedListOfRestaurants] = useState(
     []
@@ -21,6 +23,9 @@ const Body = () => {
     );
 
     const json = await data.json();
+    console.log(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
     setListOfRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -29,7 +34,7 @@ const Body = () => {
     );
   };
   const onlineStatus = useOnlineStatus();
-  if (onlineStatus === false){
+  if (onlineStatus === false) {
     return (
       <h1>Looks like you're offline. Please check your internet connection.</h1>
     );
@@ -89,10 +94,15 @@ const Body = () => {
         {displayedListOfRestaurants.map((restaurant) => {
           return (
             <Link to={"restaurant/" + restaurant?.info?.id}>
-              <RestaurantCard
-                key={restaurant?.info?.id}
-                {...restaurant?.info}
-              />
+              {isLabelled ? (
+                <RestaurantCardPromoted   key={restaurant?.info?.id}
+                {...restaurant?.info} />
+              ) : (
+                <RestaurantCard
+                  key={restaurant?.info?.id}
+                  {...restaurant?.info}
+                />
+              )}
             </Link>
           );
         })}
