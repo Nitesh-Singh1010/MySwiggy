@@ -50,4 +50,12 @@ loads.
  in componentDidMount. Why? beacuse it is called after rendering of the component and in react what we do is first we want to render the component i.e. not
  wait for the api to be called and then render the component. Once it is rendered , now we make an api call to fill the the component with data.
  React Component life cycle : render phase(constructor, render) and then commit phase(dom updation,componentdidMount , componentDidUpdate)
+
+
+
+ higher order component is a component that takes a component and returns a component i.e. it takes a component as an input, enhances the component and returns the 
+ component with the added feauture. 
+ -controlled and uncontrolled components(think of accordion study)
 */
+
+

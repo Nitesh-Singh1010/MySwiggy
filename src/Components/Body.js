@@ -5,7 +5,7 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
-  const isLabelled = false;
+  const isLabelled = true;
   const RestaurantCardPromoted = promotedRestaurantCard(RestaurantCard);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [displayedListOfRestaurants, setDisplayedListOfRestaurants] = useState(
