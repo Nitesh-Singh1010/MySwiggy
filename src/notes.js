@@ -56,6 +56,11 @@ loads.
  higher order component is a component that takes a component and returns a component i.e. it takes a component as an input, enhances the component and returns the 
  component with the added feauture. 
  -controlled and uncontrolled components(think of accordion study)
+ contexts solve the problem of prop drilling. Prop drilling in React is a technique where data is passed from a parent component to a deeply nested child component
+  through intermediate components that do not need the data themselves. This often leads to components receiving and passing props unnecessarily, which can make the 
+  code harder to manage and understand. using context api in react, the stored data in contexts can be accesed anywhere in the react application.
+
+  in redux,while doing a selector i.e. while subscribing to the store, make sure you subscribe to the right portion of the store(exactly what we need)otherwise its a
+  huge performance loss.
 */
-
-
+ 

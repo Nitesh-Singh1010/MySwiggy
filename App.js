@@ -7,11 +7,13 @@ import About from "./src/Components/About";
 import Contact from "./src/Components/Contact";
 import Error from "./src/Components/Error";
 import RestaurantMenu from "./src/Components/RestaurantMenu";
-
+import { Provider } from "react-redux";
 import { lazy } from "react";
 import { Suspense } from "react";
+import appStore from "./src/utils/appStore";
+import Cart from "./src/Components/Cart";
 // import Grocery from "./src/Components/Grocery";
-const Grocery=lazy(()=>import("./src/Components/Grocery"))
+const Grocery = lazy(() => import("./src/Components/Grocery"));
 // import RestaurantCard from "./src/Components/RestaurantCard";
 /* My Food App structure will look like this, 
             1) Header
@@ -42,8 +44,10 @@ const Grocery=lazy(()=>import("./src/Components/Grocery"))
 const AppLayout = () => {
   return (
     <>
-      <Header />
-      <Outlet />
+      <Provider store={appStore}>
+        <Header />
+        <Outlet />
+      </Provider>
     </>
   );
 };
@@ -58,8 +62,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/grocery",
-        element: (<Suspense fallback={<h1>Grocery is loading...</h1>
-        }><Grocery /></Suspense>),
+        element: (
+          <Suspense fallback={<h1>Grocery is loading...</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
       },
       {
         path: "/about",
@@ -70,9 +77,13 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path:"/restaurant/:resId",
-        element : <RestaurantMenu/>,
+        path: "/restaurant/:resId",
+        element: <RestaurantMenu />,
       },
+      {
+        path:"/cart",
+        element:<Cart/>
+      }
     ],
     errorElement: <Error />,
   },
