@@ -5,7 +5,7 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
-  const isLabelled = true;
+  const isLabelled = false;
   const RestaurantCardPromoted = promotedRestaurantCard(RestaurantCard);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [displayedListOfRestaurants, setDisplayedListOfRestaurants] = useState(
@@ -23,9 +23,10 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    console.log(json);
+    // console.log(
+    //   json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // );
     setListOfRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -60,19 +61,21 @@ const Body = () => {
             className="search-bar"
             placeholder="Search"
             value={searchText}
+            data-testid="searchInput"
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
 
           <button
-            className="search-btn px-4 py-1 bg-green-200 m-4 rounded-lg"
+            className="px-4 py-1 bg-green-200 m-4 rounded-lg"
             onClick={() => {
               const filteredList = listOfRestaurants.filter((res) =>
                 res?.info?.name.includes(searchText)
               );
               setDisplayedListOfRestaurants(filteredList);
             }}
+            data-testid="searchButton"
           >
             Search
           </button>
@@ -99,11 +102,13 @@ const Body = () => {
                 <RestaurantCardPromoted
                   key={restaurant?.info?.id}
                   {...restaurant?.info}
+                  data-testid="resCard"
                 />
               ) : (
                 <RestaurantCard
                   key={restaurant?.info?.id}
                   {...restaurant?.info}
+                  data-testid="resCard"
                 />
               )}
             </Link>

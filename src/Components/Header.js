@@ -44,6 +44,7 @@ const Header = () => {
           </li>
           <button
             className="login font-bold"
+            data-testid='loginbtn'
             onClick={() =>
               btnName === "Login" ? setBtnName("Logout") : setBtnName("Login")
             }

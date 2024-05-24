@@ -12,7 +12,7 @@ it("should load header component with a login button", () => {
       </BrowserRouter>
     </Provider>
   );
-
+  // const loginButton = screen.getByTestId("loginbtn")
   const loginButton = screen.getByRole("button", { name: "Login" });
   expect(loginButton).toBeInTheDocument();
 });

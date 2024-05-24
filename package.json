@@ -5,7 +5,8 @@
   "main": "App.js",
   "scripts": {
     "test": "jest",
-    "start": "npx parcel index.html"
+    "start": "npx parcel index.html",
+    "watch-test": "jest --watch"
   },
   "repository": {
     "type": "git",
