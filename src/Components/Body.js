@@ -32,6 +32,7 @@ const Body = () => {
     setDisplayedListOfRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    // console.log(displayedListOfRestaurants[0]?.info)
   };
   const onlineStatus = useOnlineStatus();
   if (onlineStatus === false) {
@@ -95,8 +96,10 @@ const Body = () => {
           return (
             <Link to={"restaurant/" + restaurant?.info?.id}>
               {isLabelled ? (
-                <RestaurantCardPromoted   key={restaurant?.info?.id}
-                {...restaurant?.info} />
+                <RestaurantCardPromoted
+                  key={restaurant?.info?.id}
+                  {...restaurant?.info}
+                />
               ) : (
                 <RestaurantCard
                   key={restaurant?.info?.id}

@@ -62,5 +62,10 @@ loads.
 
   in redux,while doing a selector i.e. while subscribing to the store, make sure you subscribe to the right portion of the store(exactly what we need)otherwise its a
   huge performance loss.
+
+  types of testing a developer can do:
+  unit testing-testing the components in isolation(done in this project)
+  integration testing-testing integration of the components
+  end to end testing-e2e testing- testing the whole user flow like from the point user will enter to the point it'll leave.
 */
  
