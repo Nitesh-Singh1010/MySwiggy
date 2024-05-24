@@ -65,7 +65,7 @@ loads.
 
   types of testing a developer can do:
   unit testing-testing the components in isolation(done in this project)
-  integration testing-testing integration of the components
+  integration testing-testing integration of the components(done in this project)
   end to end testing-e2e testing- testing the whole user flow like from the point user will enter to the point it'll leave.
 */
  
